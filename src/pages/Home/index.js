@@ -23,11 +23,11 @@ export default function Home() {
             <article key={filme.id}>
               <strong>{filme.nome}</strong>
               <img src={filme.foto}/>
-              <Link to="/">Acessar</Link>
+              <Link to={`/filme/${filme.id}`}>Acessar</Link>
             </article>
           )
         })}
-        </div>>
+        </div>
     </div>
   );
 }
