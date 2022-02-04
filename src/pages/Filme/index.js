@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate  } from "react-router-dom";
 import api from "../../services/api";
 import "./filme.css";
+import {toast} from 'react-toastify'
 
 export default function Filme() {
   const { id } = useParams();
@@ -16,7 +17,7 @@ export default function Filme() {
         if(response.data.length === 0){
             // Tentou acessar filme que não existe
             // É redirecionado para a home
-            navigate('/')
+            navigate('/erro')
             return
         }
 
@@ -35,14 +36,14 @@ export default function Filme() {
       const hasFilme = filmesSalvos.some((filmeSalvo) => filmeSalvo.id == filme.id)
 
       if(hasFilme){
-          alert('Você já possui esse filme')
+          toast.error('Você já possui esse filme salvo.')
           return
       }
 
       filmesSalvos.push(filme)
       localStorage.setItem('filmes', JSON.stringify(filmesSalvos))
-      alert('Filmo salvo')
-  }
+      toast.success('Filme salvo com sucesso!')
+    }
 
   if (loading) {
     return (
